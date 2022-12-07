@@ -1,7 +1,5 @@
 package com.search.data.controller;
 
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,49 +12,48 @@ import com.search.data.service.IDataService;
 
 @RestController
 public class DataController {
-	
 
 	@Autowired
 	private IDataService iDataService;
 	
-
-	
+	/**
+	 * This API is to check whether 'User' already exists or not using Pan-Card
+	 */
 	@GetMapping("/getByPancard")
-	public String getByPancard(@RequestBody DataModel dataModel) {
+	public String getByPancard(@RequestBody DataModel data) {
 
-		DataModel newModel = iDataService.findByPancard(dataModel.getPanCard());
-		
+		DataModel newModel = iDataService.findByPancard(data.getPanCard());
+
 		if (newModel != null) {
-			return "Pancard already exists";
-		}
-		else {
-			return "Record not found";
+			return "User exists already";
+		} else {
+			return "No record found";
 		}
 	}
-	
-	
+
+	/**
+	 * This API is to check whether 'User' already exist or not using Pan-card and Aadhar-Card 
+	 */
 	@GetMapping("/getByPanAndAadharCard")
-	public String getByPanAndAadhar(@RequestBody DataModel dataModel) {
-		
-		DataModel newModel = iDataService.findByPancardAndAadharCard(dataModel.getPanCard(), dataModel.getAadharCard());
-		
-		System.out.println(newModel);
-		
+	public String getByPanAndAadhar(@RequestBody DataModel data) {
+
+		DataModel newModel = iDataService.findByPancardAndAadharCard(data.getPanCard(), data.getAadharCard());
+
 		if (newModel != null) {
-			return "Pancard already exists";
+			return "User exists already";
+		} else {
+			return "No record found";
 		}
-		else {
-			return "Record not found";
-		}
-		
-		
-		
 	}
+
 	
+	/**
+	 * This API is to add data into data base 
+	 */
 	@PostMapping("/addData")
 	public String addData(@RequestBody DataModel data) {
-		
-		return iDataService.addUserData(data);
+
+		return iDataService.addUserData(data); 
 	}
 
 }

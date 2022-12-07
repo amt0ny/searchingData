@@ -9,10 +9,13 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @AllArgsConstructor
-@NoArgsConstructor
+@NoArgsConstructor 
 @Data
 public class DataModel {
-
+	
+	/**
+	 * Data attributes 
+	 */
 	@Id
 	private Integer id;
 	private String name;
@@ -24,14 +27,19 @@ public class DataModel {
 	private String bplId;
 	private String address;
 
+	/**
+	 * This Constructor to initialize only 2 parameters
+	 */
 	public DataModel(String panCard, String aadharCard) {
 		super();
 		this.panCard = panCard;
 		this.aadharCard = aadharCard;
 	}
-
-;
-
+	
+	
+	/**
+	 * This Constructor to initialize only 1 parameters
+	 */
 	public DataModel(String panCard) {
 		super();
 		this.panCard = panCard;
